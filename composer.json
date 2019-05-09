@@ -1,0 +1,24 @@
+{
+    "name": "mellera/progetto-kr-007",
+    "description": "All code needed for my framework",
+    "type": "package",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.1.0",
+        "symfony/http-kernel": "4.0.9",
+        "symfony/routing": "4.0.9",
+        "symfony/config": "4.0.9",
+        "lcobucci/jwt": "3.2.2",
+        "robmorgan/phinx": "0.10.0",
+        "symfony/dotenv": "4.0.9",
+        "symfony/console": "4.0.9",
+        "league/json-guard": "1.0.1",
+        "doctrine/orm": "2.6",
+        "symfony/security": "4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sys\\": "src/"
+        }
+    }
+}
