@@ -72,22 +72,56 @@ class Context
 
             $config->setSQLLogger(new \Sys\Logger\SQLLogger(self::logger()));
 
-            // database configuration parameters
-            $conn = array(
-                'driver' => 'pdo_mysql',
-                'user' => getenv('DB_USER'),
-                'password' => getenv('DB_PASS'),
-                'host' => getenv('DB_HOST'),
-                'port' => getenv('DB_PORT'),
-                'dbname' => getenv('DB_NAME'),
-                'charset' => getenv('DB_CHARSET')
-            );
+            $driver = getenv('DB_DRIVER');
+
+            if ($driver === 'sqlite') {
+                $conn = array(
+                    'driver' => 'pdo_sqlite',
+                    'path' => self::config()->getRootPath() . getenv('DB_PATH'),
+                );
+            } elseif ($driver === 'mysql') {
+                $conn = array(
+                    'driver' => 'pdo_mysql',
+                    'user' => getenv('DB_USER'),
+                    'password' => getenv('DB_PASS'),
+                    'host' => getenv('DB_HOST'),
+                    'port' => getenv('DB_PORT'),
+                    'dbname' => getenv('DB_NAME'),
+                    'charset' => getenv('DB_CHARSET')
+                );
+            }
 
             // obtaining the entity manager
             static::$em = \Doctrine\ORM\EntityManager::create($conn, $config);
         }
 
         return static::$em;
+    }
+
+    public static function getPhinxConnection()
+    {
+        $driver = getenv('DB_DRIVER');
+
+        $conn = array();
+
+        if ($driver === 'sqlite') {
+            $conn = array(
+                'adapter' => 'sqlite',
+                'name' => self::config()->getRootPath() . getenv('DB_PATH') // , 'suffix' => ''
+            );
+        } elseif ($driver === 'mysql') {
+            $conn = array(
+                'adapter' => 'mysql',
+                'host' => getenv('DB_HOST'),
+                'name' => getenv('DB_NAME'),
+                'user' => getenv('DB_USER'),
+                'pass' => getenv('DB_PASS'),
+                'port' => getenv('DB_PORT'),
+                'charset' => getenv('DB_CHARSET')
+            );
+        }
+
+        return $conn;
     }
 
     /**
