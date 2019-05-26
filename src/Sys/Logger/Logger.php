@@ -283,7 +283,7 @@ class Logger implements \Psr\Log\LoggerInterface
         do {
             $previousCallerObject = $callerObject;
             $callerObject = array_shift($callerObjects);
-        } while (is_array($callerObject) && array_key_exists('class', $callerObject) && $callerObject['class'] === self::class);
+        } while (is_array($callerObject) && array_key_exists('class', $callerObject) && ($callerObject['class'] === self::class || $callerObject['class'] === \Log::class));
 
         $caller = array(
             'caller:info' => '',
