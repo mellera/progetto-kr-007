@@ -2,7 +2,7 @@
 
 namespace Sys\Config;
 
-class Cli extends \Sys\Config
+abstract class Cli extends \Sys\Config
 {
 
     public function getLoggerBasePath(): string

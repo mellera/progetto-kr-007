@@ -2,7 +2,7 @@
 
 namespace Sys\Config;
 
-class Phinx extends \Sys\Config
+abstract class Phinx extends \Sys\Config
 {
 
     public function getLoggerBasePath(): string

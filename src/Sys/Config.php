@@ -5,11 +5,6 @@ namespace Sys;
 abstract class Config
 {
 
-    public function getRootPath(): string
-    {
-        return ROOT_PATH;
-    }
-
     public function getLoggerPath(): string
     {
         return '{{Y}}/{{m}}/{{d}}';
@@ -24,6 +19,8 @@ abstract class Config
     {
         return '[ {{H}}:{{i}}:{{s}} ][ {{log:level}} ][ {{caller:file}} ][ {{caller:info}} ] ';
     }
+
+    abstract public function getRootPath(): string;
 
     abstract public function getLoggerBasePath(): string;
 

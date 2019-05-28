@@ -13,10 +13,8 @@ class RequestLogger
 
         $logger->setPath('{{Y}}/{{m}}');
         $logger->setFilename('{{d}}.event');
-        $logger->setPrefix('[ {{H}}:{{i}}:{{s}} ][ {{session:id}} ][ {{user:id}} ]');
+        $logger->setPrefix('[ {{H}}:{{i}}:{{s}} ]');
         $logger->setLogLevel(\Psr\Log\LogLevel::INFO);
-        
-        $logger->setSessionId(session_id());
 
         $logger->info('[ ' . $event->getRequest()->getMethod() . ' ][ ' . $event->getRequest()->getRequestUri() . ' ]');
     }

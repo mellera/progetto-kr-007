@@ -2,7 +2,7 @@
 
 namespace Sys\Config;
 
-class Web extends \Sys\Config
+abstract class Web extends \Sys\Config
 {
 
     public function getLoggerBasePath(): string
@@ -25,7 +25,7 @@ class Web extends \Sys\Config
             'details' => array('exception' => get_class($ex)),
             'description' => $ex->getMessage()
         );
-        
+
         echo json_encode($response);
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Sys\Listener;
+namespace Sys\Listener\Web;
 
 use Symfony\Component\HttpFoundation\Response;
 

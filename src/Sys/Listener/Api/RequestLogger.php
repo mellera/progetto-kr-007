@@ -1,6 +1,6 @@
 <?php
 
-namespace Sys\Listener;
+namespace Sys\Listener\Api;
 
 use Sys\Context as Context;
 

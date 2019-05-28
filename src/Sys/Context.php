@@ -89,6 +89,8 @@ class Context
                     'dbname' => getenv('DB_NAME'),
                     'charset' => getenv('DB_CHARSET')
                 );
+            } else {
+                throw new \InvalidArgumentException('Invalid DB_DRIVER');
             }
 
             // obtaining the entity manager
@@ -119,6 +121,8 @@ class Context
                 'port' => getenv('DB_PORT'),
                 'charset' => getenv('DB_CHARSET')
             );
+        } else {
+            throw new \InvalidArgumentException('Invalid DB_DRIVER');
         }
 
         return $conn;
@@ -139,7 +143,28 @@ class Context
      */
     public static function getAppKey(): string
     {
-        return getenv('APP_KEY');
+        $appKey = getenv('APP_KEY');
+
+        if ($appKey === null || $appKey === '') {
+            throw new \InvalidArgumentException();
+        }
+
+        return $appKey;
+    }
+
+    /**
+     * 
+     * @return string
+     */
+    public static function getEncryptionKey(): string
+    {
+        $encryptionKey = getenv('ENCRYPTION_KEY');
+
+        if ($encryptionKey === null || $encryptionKey === '') {
+            throw new \InvalidArgumentException();
+        }
+
+        return $encryptionKey;
     }
 
 }

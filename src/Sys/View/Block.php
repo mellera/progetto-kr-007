@@ -22,7 +22,7 @@ class Block
      * @param \Sys\File\View $template
      * @param array $data
      */
-    public function __construct(\Sys\File\View $template, array $data = array())
+    public function __construct(\Sys\File $template, array $data = array())
     {
         $this->template = $template;
         $this->data = $data;

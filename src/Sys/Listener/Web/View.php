@@ -10,10 +10,10 @@ class View
 
     public function onKernelView(GetResponseForControllerResultEvent $event)
     {
-        $controlleResult = $event->getControllerResult();
+        $controllerResult = $event->getControllerResult();
 
-        if ($controlleResult instanceof \Sys\View\Block) {
-            $event->setResponse(new Response($controlleResult->render(), Response::HTTP_OK));
+        if ($controllerResult instanceof \Sys\View\Block) {
+            $event->setResponse(new Response($controllerResult->render(), Response::HTTP_OK));
         }
     }
 
