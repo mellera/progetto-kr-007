@@ -2,30 +2,21 @@
 
 namespace Sys;
 
-abstract class Config
+interface Config
 {
 
-    public function getLoggerPath(): string
-    {
-        return '{{Y}}/{{m}}/{{d}}';
-    }
+    public function getLoggerPath(): string;
 
-    public function getLoggerFilename(): string
-    {
-        return '{{user:username}}.log';
-    }
+    public function getLoggerFilename(): string;
 
-    public function getLoggerPrefix(): string
-    {
-        return '[ {{H}}:{{i}}:{{s}} ][ {{log:level}} ][ {{caller:file}} ][ {{caller:info}} ] ';
-    }
+    public function getLoggerPrefix(): string;
 
-    abstract public function getRootPath(): string;
+    public function getRootPath(): string;
 
-    abstract public function getLoggerBasePath(): string;
+    public function getLoggerBasePath(): string;
 
-    abstract public function getLogLevel(): string;
+    public function getLogLevel(): string;
 
-    abstract public function handleException(\Throwable $ex);
+    public function handleException(\Throwable $ex);
 
 }
