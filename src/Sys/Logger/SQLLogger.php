@@ -2,14 +2,12 @@
 
 namespace Sys\Logger;
 
-use Sys\Context as Context;
-
 class SQLLogger implements \Doctrine\DBAL\Logging\SQLLogger
 {
 
     public function startQuery($sql, array $params = null, array $types = null)
     {
-        Context::logger()->debug($sql . ' ' . json_encode($params));
+        \Log::debug($sql . ' ' . json_encode($params));
     }
 
     private static function interpolate($message, array $params = null)

@@ -11,8 +11,8 @@ class Exception
     {
         $e = $event->getException();
 
-        \Sys\Context::logger()->debug(get_class($e) . ' ' . $e->getFile() . '::' . $e->getLine());
-        \Sys\Context::logger()->error($e->getMessage() . PHP_EOL . $e->getTraceAsString());
+        \Log::debug(get_class($e) . ' ' . $e->getFile() . '::' . $e->getLine());
+        \Log::error($e->getMessage() . PHP_EOL . $e->getTraceAsString());
 
         $details = array();
 
@@ -31,7 +31,18 @@ class Exception
             $status = Response::HTTP_INTERNAL_SERVER_ERROR;
         }
 
-        $response = new \Sys\Response\ErrorJson($status, $e->getMessage(), $details);
+        $response = new \Symfony\Component\HttpFoundation\JsonResponse(null, $status, array('Access-Control-Allow-Origin' => '*'), false);
+
+        $data = array(
+            'status' => $status,
+            'description' => $e->getMessage() ?? Response::$statusTexts[$status]
+        );
+
+        if (count($details)) {
+            $data['details'] = $details;
+        }
+
+        $response->setData($data);
 
         $event->setResponse($response);
     }
