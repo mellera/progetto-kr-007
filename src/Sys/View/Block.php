@@ -7,7 +7,7 @@ class Block
 
     /**
      *
-     * @var \Sys\File\View
+     * @var \Sys\File\File
      */
     private $template;
 
@@ -19,10 +19,10 @@ class Block
 
     /**
      * 
-     * @param \Sys\File\View $template
+     * @param \Sys\File\File $template
      * @param array $data
      */
-    public function __construct(\Sys\File $template, array $data = array())
+    public function __construct(\Sys\File\File $template, array $data = array())
     {
         $this->template = $template;
         $this->data = $data;
