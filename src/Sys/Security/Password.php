@@ -1,6 +1,6 @@
 <?php
 
-namespace Security;
+namespace \Sys\Security;
 
 class Password
 {
