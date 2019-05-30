@@ -1,6 +1,6 @@
 <?php
 
-namespace \Sys\Security;
+namespace Sys\Security;
 
 class JWT
 {
