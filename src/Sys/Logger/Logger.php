@@ -69,6 +69,12 @@ class Logger implements \Psr\Log\LoggerInterface
 
     /**
      *
+     * @var string
+     */
+    private $requestId = '';
+
+    /**
+     *
      * @var array
      */
     private $context = array();
@@ -154,6 +160,15 @@ class Logger implements \Psr\Log\LoggerInterface
     }
 
     /**
+     * 
+     * @param string $requestId
+     */
+    public function setRequestId($requestId)
+    {
+        $this->requestId = $requestId;
+    }
+
+    /**
      *
      * @param string $level
      * @param string $message
@@ -163,7 +178,7 @@ class Logger implements \Psr\Log\LoggerInterface
     public function log($level, $message, array $context = array())
     {
         if (!array_key_exists($level, self::LOG_LEVELS)) {
-            throw new \InvalidArgumentException('livello non gestito');
+            throw new \InvalidArgumentException('Not valid level');
         }
 
         if (self::LOG_LEVELS[$this->logLevel] >= self::LOG_LEVELS[$level]) {
@@ -175,7 +190,7 @@ class Logger implements \Psr\Log\LoggerInterface
                 mkdir($path, 0770, true);
             }
 
-            $file = fopen($path . '/' . $this->interpolate($this->filename), "a+");
+            $file = fopen($path . '/' . $this->interpolate($this->filename), 'a+');
 
             if ($file) {
                 fwrite($file, $this->interpolate($this->prefix) . $this->formatLogMessage($message, $context));
@@ -233,9 +248,11 @@ class Logger implements \Psr\Log\LoggerInterface
      */
     private function interpolate(string $message, array $context = array()): string
     {
-        // build a replacement array with braces around the context keys
         $replace = array();
+
+        // build a replacement array with braces around the context keys
         foreach ((count($context) > 0 ? $context : $this->context) as $key => $val) {
+
             // check that the value can be casted to string
             if (!is_array($val) && (!is_object($val) || method_exists($val, '__toString'))) {
                 $replace['{{' . $key . '}}'] = (string) $val;
@@ -265,6 +282,7 @@ class Logger implements \Psr\Log\LoggerInterface
             'user:id' => $this->user instanceof \Sys\Interfaces\User ? $this->user->getId() : 'NULL',
             'user:username' => $this->user instanceof \Sys\Interfaces\User ? $this->user->getUsername() : 'NULL',
             'session:id' => $this->sessionId,
+            'request:id' => $this->requestId,
         );
 
         $this->context = array_merge($context, $this->getCaller());

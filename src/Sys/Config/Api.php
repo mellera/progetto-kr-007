@@ -27,7 +27,7 @@ abstract class Api implements \Sys\Config
 
     public function getLoggerPrefix(): string
     {
-        return '[ {{H}}:{{i}}:{{s}} ][ {{log:level}} ][ {{caller:file}} ][ {{caller:info}} ] ';
+        return '[ {{H}}:{{i}}:{{s}} ][ {{request:id}} ][ {{log:level}} ][ {{caller:file}} ][ {{caller:info}} ] ';
     }
 
     public function handleException(\Throwable $ex)

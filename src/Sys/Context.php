@@ -32,6 +32,11 @@ class Context
         static::$config = $config;
     }
 
+    public static function init()
+    {
+        self::logger()->setRequestId(bin2hex(openssl_random_pseudo_bytes(16)));
+    }
+
     /**
      *
      * @return \Sys\Config
